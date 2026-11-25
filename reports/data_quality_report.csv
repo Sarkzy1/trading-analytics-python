@@ -1,0 +1,15 @@
+Issue,Records,Trade_IDs,Potential impact,Planned action
+Missing Exit_Price,1,T025,P&L and drawdown cannot be checked for the trade,"Derive from P&L, flag as imputed"
+Missing Position_Size_Lots,1,T031,P&L cannot be reconciled to a size,"Derive from P&L, flag as imputed"
+Missing Realized_PnL_USD,1,T036,Would silently shrink net P&L if dropped,"Derive from prices and size, flag as imputed"
+Exact duplicate row,1,T011,Double-counts a trade (inflates P&L and trade count),Remove the repeated copy only
+"Same Trade_ID, different values",0,-,Cannot tell which record is true,Investigate - none found
+Gap in Trade_ID sequence,1,T039,"A real trade may be absent, so totals could be incomplete",Do not invent it; verify against broker log
+Invalid Trade_ID format,0,-,Breaks joins and sorting,None found
+Inconsistent Instrument text,2,"T007, T013",EURUSD would be split into 3 groups,"Standardize to EURUSD, keep raw column"
+Inconsistent Direction text,1,T020,BUY and Buy counted as different directions,"Standardize to Buy/Sell, keep raw column"
+Unparseable Trade_Date,0,-,Breaks time-series analysis,None found
+Non-positive price,0,-,Impossible market price,None found
+Non-positive position size,0,-,Impossible position size,None found
+Non-numeric entry in a numeric column,0,-,"Text such as ""n/a"" would stop arithmetic or silently become NaN",None found
+Infinite value in a numeric column,0,-,"Infinity would corrupt sums, drawdown and averages",None found

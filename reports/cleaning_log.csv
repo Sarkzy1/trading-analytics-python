@@ -1,0 +1,10 @@
+Step,Transformation / exclusion,Records affected,Trade_IDs,Justification
+1,"Standardize Instrument (trim, remove ""/"", upper-case)",2,"T007, T013",Same instrument written 3 ways would split EURUSD results. Raw text kept in Instrument_Raw.
+2,Standardize Direction to Buy/Sell,38,"T001, T002, T003, T004, T005, T006, T007, T008, T009, T010, T011, T012, T013, T014, T015, T016, T017, T018, T019, T021, T022, T023, T024, T025, T026, T027, T028, T029, T030, T031, T032, T033, T034, T035, T036, T037, T038, T040",Case differences are formatting only. Raw text kept in Direction_Raw.
+3,Parse Trade_Date to datetime,39,all,Needed for sorting and time series; no failures.
+4,Remove exact duplicate row,1,T011,"Every field identical, so it is a repeated copy. Only exact copies were removed."
+5,Impute missing Exit_Price (T025),1,T025,Entry + P&L / (lots x 100000 x direction). Flagged Imputed_Unverified; confirm with broker log.
+6,Impute missing Position_Size_Lots (T031),1,T031,P&L / (price move x 100000 x direction). Flagged Imputed_Unverified.
+7,Impute missing Realized_PnL_USD (T036),1,T036,Lots x price move x 100000 x direction. Flagged Imputed_Unverified.
+8,Flag suspect instrument/price (not changed),1,T007,Prices look like GBPUSD. Kept as recorded and flagged Needs_Review; sensitivity shown in Stage 4.
+9,Record missing Trade_ID gap (no row created),1,T039,Possibly an unrecorded trade. Not invented; verify with the broker.
