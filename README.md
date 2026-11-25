@@ -4,6 +4,14 @@
 
 ![Trading performance dashboard](figures/trading_dashboard.png)
 
+## GitHub release status
+
+The Python notebook, raw synthetic dataset, documentation, and verification script are committed to this repository. **Generated outputs** (the dashboard PNG/PDF, cleaned CSV, audit CSVs, and report PDF) are published by the included GitHub Actions workflow.
+
+**To publish generated outputs the first time:** Open the repository **Actions** tab, select **Generate portfolio dashboard**, click **Run workflow**, select `main`, and confirm. Wait for a green check mark; the workflow will commit generated outputs back to `main`. Until that workflow completes, the dashboard image near the top of this README may not display.
+
+If GitHub Actions is disabled for the repository, enable it in the repository settings or run the notebook locally as explained below. No broker records or private credentials should be uploaded.
+
 ## Project overview
 
 The notebook loads 40 source rows, removes one exact duplicate (T011), standardizes labels, checks data quality, reconstructs three missing fields with explicit flags, reconciles estimated trade P&L against recorded P&L, calculates performance statistics, analyzes drawdown and time-based results, and exports a six-panel dashboard and audit reports.
